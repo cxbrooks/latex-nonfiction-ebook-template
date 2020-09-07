@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Convert a .tex into a PDF, Kindle mobi, or iBook epub in a subdirectory.
 # ----------------------------------------------------------------------------
 # LaTeX eBook utility tools
@@ -214,6 +214,8 @@ function prepareDir()
     fi
     run "mkdir -p \"$toDir/tex\""
     run "cp $bookName.tex   \"$toDir\""
+    run "echo \"$toDir/bookName.tex\""
+    run "ls -l \"$toDir/$bookName.tex\""
     copyIfExists "$bookName.cfg" "$toDir"
     if [[ $ishtml -eq 1 ]]; then
         copyIfExists "tex4ht.env"   "$toDir"
@@ -418,7 +420,7 @@ function evalrv()
 function getBookParam()
 {
     local pname=$1
-    local cmd='perl -0ne '"'"'print "$1\n" if /\\'"$pname"'{(.*)}/g'
+    local cmd='perl -0ne '"'"'print "$1\n" if /\\'"$pname"'\{(.*)\}/g'
     local cmd+="' < $parametersName.tex"
     #echo "-----------[$cmd]" 
     evalrv "$cmd"

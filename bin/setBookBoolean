@@ -153,7 +153,8 @@ function getTexParam()
 {
     #perl -0ne '"print "[$1]\n" if /\\Boolean{RAWHTML}\s*{(.*)}/' eBook.tex
     local pname=$1
-    local cmd='perl -0ne '"'"'print "$1\n" if /\\Boolean{'"$pname"'}\s*{(.*)}/'
+    #local cmd='perl -0ne '"'"'print "$1\n" if /\\Boolean{'"$pname"'}\s*{(.*)}/'
+    local cmd='perl -0ne '"'"'print "$1\n" if /\\Boolean\{'"$pname"'\}\s*\{(.*)\}/'
     cmd+="' < $bookName.tex"
     evalrv "$cmd"
 }
@@ -169,7 +170,7 @@ function setTexParam()
     local cmd='perl -0ne '"'"'$b="'"$pname"'";$v="'"$newValue"'";'
 
     #s/(.*\\Boolean{$b}\s*{)(.*)(}.*)/\1$v\3/
-    cmd+='s/(.*\\Boolean{$b}\s*{)(.*)(}.*)/\1$v\3/'
+    cmd+='s/(.*\\Boolean\$b\\s*{)(.*)(}.*)/\1$v\3/'
 
     # ; print $_' eBook.tex > eBook.2
     cmd+="; print $_' $bookName.tex > $bookName.tmp"
@@ -187,6 +188,11 @@ function doSetParam()
     local paramName="$1"
     local newValue="$2"
     getTexParam "$paramName"
+    if [ ! -s "$bookName.tex" ]; then
+       ls -l "$bookName.tex"
+       echo "$0: Error: doSetParam $paramName $newValue: $bookName.tex is of size 0?  Check for errors above"
+       exit 2
+    fi
     local currentValue="$rv"
     vecho "- Current value is [$currentValue]"
     if [[ $trialRun == 0 ]]; then    
