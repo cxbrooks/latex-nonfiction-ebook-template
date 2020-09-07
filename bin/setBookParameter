@@ -139,7 +139,7 @@ function evalrv()
 function getBookParam()
 {
     local pname=$1
-    local cmd='perl -0ne '"'"'print "$1\n" if /\\'"$pname"'{(.*)}/'
+    local cmd='perl -0ne '"'"'print "$1\n" if /\\'"$pname"'\{(.*)\}/'
     local cmd+="' < $parametersName.tex"
     evalrv "$cmd"
 }
