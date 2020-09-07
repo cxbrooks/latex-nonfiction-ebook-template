@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Clean up trash files for a LaTeX .tex file.
 # ----------------------------------------------------------------------------
 # LaTeX eBook utility tools
