@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/local/bin/python2.7
 # Rescale .xbb file values for epub formatting.
 # ----------------------------------------------------------------------------
 # LaTeX eBook utility tools
