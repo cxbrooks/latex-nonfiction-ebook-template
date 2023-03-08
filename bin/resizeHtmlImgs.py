@@ -1,4 +1,4 @@
-#!/opt/local/bin/python2.7
+#!/usr/local/bin/python2.7
 #make executable in bash chmod +x PyRun
 # Rescales all img elements in the html book page to make them look nice.
 # htlatex has no good method to rescale all images and scalebox is
