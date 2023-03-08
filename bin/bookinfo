@@ -73,7 +73,7 @@ function dirMatches
     local dir1=$1
     local dir2=$2
     if [[ -e "$dir1" ]] && [[ -e "$dir2" ]]; then
-        [[ "$(stat -c "%d:%i" $dir1)" == "$(stat -c "%d:%i" $dir2)" ]] && return 0
+        [[ "$(gstat -c "%d:%i" $dir1)" == "$(gstat -c "%d:%i" $dir2)" ]] && return 0
     fi
     return 1
 }
