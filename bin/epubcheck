@@ -7,8 +7,11 @@
 # -----------------------------------------------------------------------------
 function main()
 {
-    jar=$HOME/LaTeX/epubcheck/target/epubcheck.jar
+    #jar=$HOME/LaTeX/epubcheck/target/epubcheck.jar
+    jar=/Users/cxh/src/epubcheck/target/epubcheck.jar
     if [[ -e "$jar" ]]; then
+        echo "$0: latex-nonfiction-ebook-template/bin/epubcheck: using $jar"
+        java -jar $jar --version
         exec java -jar $jar "$@"
     else
         echo "Sorry, \"$jar\" does not exist"
