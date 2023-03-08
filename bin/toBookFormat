@@ -9,7 +9,7 @@ declare fullScriptName=$_
 declare scriptName=$(basename $0)
 
 # Scripts calls other scripts in the same directory by simple name.
-declare absScriptFile=$(readlink -f "$0")
+declare absScriptFile=$(greadlink -f "$0")
 declare absScriptPath=$(dirname "$absScriptFile")
 PATH=$absScriptPath:$PATH
 
@@ -82,8 +82,8 @@ function checkDir()
     if [[ -e "$dirName" ]]; then
         local toFile="$dirName/$fileName"
         if ! [[ -e "$toFile" ]]; then
-            qecho "*** Suspicious target directory. Clear it yourself first."
-            fail "$toFile should exist."
+            qecho "$0: *** Suspicious target directory. $toFile exists. Clear $dirName yourself first."
+            fail "$toFile should exist!"
         fi
     fi
 }
@@ -96,7 +96,7 @@ function dirMatches
     local dir1=$1
     local dir2=$2
     if [[ -e "$dir1" ]] && [[ -e "$dir2" ]]; then
-        [[ "$(stat -c "%d:%i" $dir1)" == "$(stat -c "%d:%i" $dir2)" ]] && return 0
+        [[ "$(gstat -c "%d:%i" $dir1)" == "$(gstat -c "%d:%i" $dir2)" ]] && return 0
     fi
     return 1
 }
@@ -306,18 +306,24 @@ function makePdf()
     local pdfparms="-synctex=1 -interaction=nonstopmode \"$bookName\".tex"
     if [[ totext -eq 1 ]]; then
         logrun "Latex to PDF -- pass 1" "pdflatex" "$pdfparms" 1
-        logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        # cx: Use biber with biblatex package for section bibliography
+        #logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        logrun "Generate bibliography" "biber" "$bookName" 1
         logrun "Latex to PDF -- pass 2" "pdflatex" "$pdfparms" 1
-        logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
+        echo "Skipping generating referenced authors list because setting NOAUTHORS does not work"
+        #logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
         logrun "Generate index" "makeindex" "\"$bookName\".idx" 2
         logrun "Latex to PDF -- pass 3" "pdflatex" "$pdfparms" 1        
         pdfparms="--output-format=dvi $pdfparms"
         logrun "Latex to DVI ($bookName.dvi)" "pdflatex" "$pdfparms" -1
     else
         logrun "Latex to PDF -- pass 1" "pdflatex" "$pdfparms" 1
-        logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        # cx: Use biber with biblatex package for section bibliography
+        #logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        logrun "Generate bibliography" "biber" "$bookName" 1
         logrun "Latex to PDF -- pass 2" "pdflatex" "$pdfparms" 1
-        logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
+        echo "Skipping generating referenced authors list because setting NOAUTHORS does not work"
+        #logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
         logrun "Generate index" "makeindex" "\"$bookName\".idx" 2
         logrun "Latex to PDF -- pass 3" "pdflatex" "$pdfparms" 1
         logrun "Latex to PDF -- pass 4" "pdflatex" "$pdfparms" 1
@@ -347,15 +353,16 @@ function makeEpub()
 {
     #makeXbbFiles
     #logrun "Resize XBB files" "../bin/resizeXbb.py" "--stringIO -dir=images" 3
-    local cmd="$bookName.tex"
+    local cmd="$bookName.tex -f epub3"
     if [[ -e "$bookName.cfg" ]]; then
         cmd="--config $bookName.cfg $cmd"
     fi
-    logrun "Create iBook .epub file(s) - pass 1" "tex4ebook" "$cmd" 3
+    logrun "$0: which tex4ebook: " which "tex4ebook"
+    logrun "$0: Create iBook .epub file(s) - pass 1" "tex4ebook" "$cmd" 3
     logrun "Hypertext index preprocessor" "tex" "'\\def\\filename{{$bookName}{idx}{4dx}{ind}} \\input idxmake.4ht'" 1    
     logrun "Make hyperlinked index" "makeindex" "-o \"$bookName\".ind \"$bookName\".4dx " 2    
     logrun "Create iBook .epub file - pass 2" "tex4ebook" "$cmd" 3
-    logrun "Check the .epub file for problems and non-conformance" "epubcheck" "$bookName.epub" -3
+    logrun "Check the .epub file for problems and non-conformance" "epubcheck" "-v 3.0 $bookName.epub" -3
     
     if [[ $trialRun -eq 0 ]]; then
         local lineCount=`wc -l < "$lastLogFile"`
@@ -604,7 +611,8 @@ function main()
             makeHtml
         else
             if [[ $noClean -eq 0 ]]; then 
-               run texclean -q "$bookName.tex"
+                echo "$0: Skipping texclean"
+               #run texclean -q "$bookName.tex"
            fi
         fi    
     fi
