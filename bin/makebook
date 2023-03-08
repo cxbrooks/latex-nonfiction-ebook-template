@@ -10,7 +10,7 @@ declare fullScriptName=$_
 declare scriptName=$(basename "$0")
 
 # Scripts calls other scripts in the same directory by simple name.
-declare absScriptFile=$(readlink -f "$0")
+declare absScriptFile=$(greadlink -f "$0")
 declare absScriptPath=$(dirname "$absScriptFile")
 PATH=$absScriptPath:$PATH
 
@@ -35,7 +35,7 @@ declare makeEpub=0
 declare makeMobi=0
 declare noCover=0
 declare hardcover=0
-declare binDir=$(readlink -f './bin')
+declare binDir=$(greadlink -f './bin')
 declare clearScript=1
 
 #------------------------------------------------------------------------------
