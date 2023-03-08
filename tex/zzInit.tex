@@ -322,11 +322,13 @@
 %%---------------------------------------------------------------------
 % Outputs the Book End Notes section, if needed.
 \newcommand{\BookEndNotes}{%
-  \ifthenelse{\boolean{CHAPTERNOTES}}{}{%
-    \cleardoublepage\phantomsection%
-    \addcontentsline{toc}{chapter}{Notes by Chapter}%
-    \theendnotes%
-  }%
+   \ifthenelse{\boolean{NOENDNOTES}}{}{%
+     \ifthenelse{\boolean{CHAPTERNOTES}}{}{%
+       \cleardoublepage\phantomsection%
+       \addcontentsline{toc}{chapter}{Notes by Chapter}%
+       \theendnotes%
+     }%
+   }%
 }
 
 %%---------------------------------------------------------------------
@@ -420,7 +422,9 @@
   }%        
  }{%
   \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
-   \IMAGE[#1]{#2.png}%
+   \IfFileExists{\ImageSource/#2.pdf}{\IMAGE[#1]{#2.pdf}}{%
+    \IMAGE[#1]{#2.png}%
+   }%        
   }%        
  }%
 }
