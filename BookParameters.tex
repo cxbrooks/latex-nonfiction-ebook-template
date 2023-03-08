@@ -18,52 +18,52 @@
 % -- Ingram: page count MUST be divisible by 2.
 % -- Blurb : page count MUST be divisible by 6.
 % Add blank pages as needed in final PDF generations!
-\pgfmathsetmacro\TotalPageCount{33}% Must be manually entered
+\pgfmathsetmacro\TotalPageCount{164}% Must be manually entered
 \pgfmathsetmacro\PaperWidthPt{6in}%
 \pgfmathsetmacro\PaperHeightPt{9in}%
 
 %\def\ShowCoverStatistics{}% Enable to show some numbers on back cover.
 
-\def\TheMainTitle{The Ultimate Book}
-\def\TheSubTitle{Hey! Why Not Read This One?}
-\def\TheSubTitleA{Hey!}
-\def\TheSubTitleB{Why Not Read This One?}
-\def\TheBookSeries{Books That Are Really Odd Series}
+\def\TheMainTitle{Black Rock Dead}
+\def\TheSubTitle{The intentional and accidental deaths}
+\def\TheSubTitleA{In the}
+\def\TheSubTitleB{Black Rock Desert, Nevada}
+\def\TheBookSeries{The Black Rock Dead Series}
 
-\def\TheAuthor{Wilson J. Schmeggles}
-\def\TheAuthorA{Wilson J.}
-\def\TheAuthorB{Schmeggles}
-\def\TheAuthorLNF{Schmeggles, Wilson, J.}
+\def\TheAuthor{Lucius Arcularius}
+\def\TheAuthorA{Lucius}
+\def\TheAuthorB{Arcularius}
+\def\TheAuthorLNF{Arcularius, Lucius}
 
-\def\TheCopyrightYear{2017}
+\def\TheCopyrightYear{2023}
 \def\TheEdition{First Edition}
 
-\def\ThePublisherName{Your Press}% Just the short form name
-\def\ThePublisherLineA{Your}% Just one part of the name
-\def\ThePublisherLineB{Press}% Just one part of the name
+\def\ThePublisherName{Publisher Name TBD - short form}% Just the short form name
+\def\ThePublisherLineA{Publisher Line A}% Just one part of the name
+\def\ThePublisherLineB{Publisher Line B}% Just one part of the name
 \def\ThePublisher{\ThePublisherName}% Add Ltd, Inc, LLC etc here
-\def\ThePublisherAddrA{1234 Xyzzy Plugh Ln}
-\def\ThePublisherAddrB{North Wyodaka, QM 45678}
-\def\ThePublisherCity{Wyodaka}
-\def\ThePublisherState{QM}
+\def\ThePublisherAddrA{Pub AddrA}
+\def\ThePublisherAddrB{Pub AddrB}
+\def\ThePublisherCity{Pub City}
+\def\ThePublisherState{Pub State}
 
-\def\ThePrinter{CreateSpace, An Amazon.com Company}
+\def\ThePrinter{TBD}
 
-\def\TheSubjectArea{Yada, Yada, Yada}
+\def\TheSubjectArea{Black Rock Desert, Nevada History, Real Crime, Nonfiction}
 
-\def\TheKeywords{Yadas, Books, Odd, Wierd}
+\def\TheKeywords{Black Rock Desert, Nevada History, Real Crime, Nonfiction}
 
 %% ----------------------------------------------------------------------------
 % NOTE Each version of a book usually requires its own ISBN. You can
 % obtain blocks of 10 ISBNs for $250 from https://www.myidentifiers.com/
 % You must know you Imprint Name (publisher). 
 % Dashes MUST be placed in the correct postions in the ISBNs.
-\def\PrintISBN{978-4-4444444-4-6}% 
-\def\PrintISBNShort{4-4444444-4-9}%
+\def\PrintISBN{979-8-218-04366-7}% 
+\def\PrintISBNShort{8-218-04366-7}%
 %\def\HardcoverISBN{978-4-4444444-4-6}%
 %\def\HardcoverISBNShort{4-4444444-4-9}%  
-\def\EbookISBN{978-5-5555555-5-7}%
-\def\EbookISBNShort{5-5555555-5-9}%
+\def\EbookISBN{979-8-218-04367-4}%
+\def\EbookISBNShort{5-5555555-5-7}%
 
 %% ----------------------------------------------------------------------------
 % The ISBN barcode is created with the GhostScript barcode.ps generator:
@@ -71,7 +71,7 @@
 %       https://github.com/bwipp/postscriptbarcode.
 % Use 99.99 if your price exceeds $100 (good luck selling that puppy).
 % Comment out these entries if you don't want a price in the barcode.
-\def\PrintPrice{9.95}% Price in dollars and cents for barcode.
+\def\PrintPrice{29.95}% Price in dollars and cents for barcode.
 %\def\HardcoverPrice{19.95}% Price in dollars and cents for barcode.
 
 %% ----------------------------------------------------------------------------
@@ -107,19 +107,20 @@
 % Also called : Library of Congress Card Number
 %
 % This takes about a day to get assigned and is free.
-\def\TheLCPCN{2017xxxxxx}
+\def\TheLCPCN{2021xxxxxx}
 
 %% ----------------------------------------------------------------------------
-\def\TheCopyrightKeywords{1. History; 2. Nonsense; 3. Made up stuff}
+\def\TheCopyrightKeywords{1. Black Rock Desert; 2. Nevada History; 3. True Crime}
 
 \def\ShortDescription{% Normally restricted to 300 t0 350 characters depending on publisher.
-\textsf{\textbf{World War II and the Manhattan Project} -- a group of Hungarian scientists that included émigré physicist Leó Szilárd attempted to alert Washington.}}
+\textsf{\textbf{Black Rock Dead} -- The Black Rock Desert of northwestern Nevada has a long history and along with that history are a series of accidental and intentional deaths. FIXME: Normally restricted to 300 t0 350 characters depending on publisher. }}
 
 \def\BackDescription{% Typically max 2000-4000 characters
-\textsf{\textbf{World War II and the Manhattan Project} -- a group of Hungarian scientists that included émigré physicist Leó Szilárd attempted to alert Washington to ongoing Nazi atomic bomb research. instein and Szilárd, along with other refugees such as Edward Teller and Eugene Wigner, ``regarded it as their responsibility to alert Americans to the possibility that German scientists might win the race to build an atomic bomb, and to warn that Hitler would be more than willing to resort to such a weapon.'' To make certain the U.S. was aware of the danger, in July 1939, a few months before the beginning of World War II in Europe, Szilárd and Wigner visited Einstein to explain the possibility of atomic bombs, which Einstein, a pacifist, said he had never considered.}}
+\textsf{\textbf{Black Rock Dead} -- The Black Rock Desert of northwestern Nevada has a long history and along with that history are a series of accidental and intentional deaths. FIXME: Typically max 2000-4000 characters}}
+
 
 \def\AuthorBio{% 
-\textsf{\textbf{Wilson J. Schmeggles} was a German-born theoretical physicist. He developed the general theory of relativity, one of the two pillars of modern physics (alongside quantum mechanics). His work is also known for its influence on the philosophy of science. He is best known in popular culture for his rubber–ducky equivalence formula.}}
+\textsf{\textbf{Lucius Arcularius} died at Wall Spring, Nevada on March 1, 1865.}}
 
 %% ----------------------------------------------------------------------------
 %% Computed parameters for cover and jacket design 
@@ -168,7 +169,8 @@
 \pgfmathsetmacro\FoldVariance{\FoldVariancePt/ \PtsPerInch}%
  
 %% ----------------------------------------------------------------------------
-\renewcommand{\bf}[1]{\textbf{#1}}% Legacy \bf support.
+%\renewcommand{\bf}[1]{\textbf{#1}}% Legacy \bf support.
+\newcommand{\bf}[1]{\textbf{#1}}% Legacy \bf support.
 
 \newcommand{\SetBool}[2]{%
   \ifthenelse{\equal{#2}{true}\OR\equal{#2}{on}\OR\equal{#2}{yes}}%
