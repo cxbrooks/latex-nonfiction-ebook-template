@@ -308,6 +308,10 @@ function makePdf()
         logrun "Latex to PDF -- pass 1" "pdflatex" "$pdfparms" 1
         # cx: Use biber with biblatex package for section bibliography
         #logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        #qecho "If biber fails 2_biber.log ends with:"
+        # qecho "   'INFO - Found BibTeX data source '../../book.bib' '"
+        # qecho "  then run biber --cache and delete that directory."
+        # qecho "  see https://tex.stackexchange.com/questions/579291/biber-exiting-with-error-code-2-but-no-error-messages"
         logrun "Generate bibliography" "biber" "$bookName" 1
         logrun "Latex to PDF -- pass 2" "pdflatex" "$pdfparms" 1
         echo "Skipping generating referenced authors list because setting NOAUTHORS does not work"
@@ -320,13 +324,19 @@ function makePdf()
         logrun "Latex to PDF -- pass 1" "pdflatex" "$pdfparms" 1
         # cx: Use biber with biblatex package for section bibliography
         #logrun "Generate bibliography" "bibtex" "\"$bookName\".aux" 1
+        qecho "If biber fails 2_biber.log ends with"
+        qecho "   'INFO - Found BibTeX data source '../../book.bib' '"
+        qecho "then run biber --cache and delete that directory."
+        qecho "see https://tex.stackexchange.com/questions/579291/biber-exiting-with-error-code-2-but-no-error-messages"
         logrun "Generate bibliography" "biber" "$bookName" 1
         logrun "Latex to PDF -- pass 2" "pdflatex" "$pdfparms" 1
+        logrun "Generate bibliography (again)" "biber" "$bookName" 1
         echo "Skipping generating referenced authors list because setting NOAUTHORS does not work"
         #logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
         logrun "Generate index" "makeindex" "\"$bookName\".idx" 2
         logrun "Latex to PDF -- pass 3" "pdflatex" "$pdfparms" 1
         logrun "Latex to PDF -- pass 4" "pdflatex" "$pdfparms" 1
+        #logrun "Latex to PDF -- pass 5" "pdflatex" "$pdfparms" 1
     fi
  }
 
