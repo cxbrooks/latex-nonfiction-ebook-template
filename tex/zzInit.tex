@@ -18,7 +18,8 @@
 \usepackage{xparse}                     % Extended newcommands
 \usepackage{makeidx}          % Enable Index creation
 \usepackage[tight]{shorttoc}            % Allow an abbreviated table of contents
-\usepackage{tocloft}                    % Control TOC and create new lists
+% cxh: commented out because tocloft package interfers with a KOMA-Script class
+%\usepackage{tocloft}                    % Control TOC and create new lists
 
 % Note BIBLATEX *cannot* be enabled with these packages.
 %\usepackage[backend=biber]{biblatex}   % Use the BIBER citation generator
@@ -429,20 +430,21 @@
  }%
 }
 
+% cxh: commented because tocloft package interfers with a KOMA-Script class
 %%---------------------------------------------------------------------
 %%---------------------------------------------------------------------
 % Define an additional list file (.los) for Figure Sources
-\def\theFigureSource{x}%
+%% \def\theFigureSource{x}%
 
-\newcommand{\listsourcename}{List of Figure Sources}
-\newlistof{sources}{los}{\listsourcename}
+%% \newcommand{\listsourcename}{List of Figure Sources}
+%% \newlistof{sources}{los}{\listsourcename}
 
-% Outputs the current figure source line to the .los.
-\newcommand*{\iGenFigureSource}[1]{%
-  \ifthenelse{\equal{#1}{x}}{}{%
-    \addcontentsline{los}{section}{\protect\numberline{\thefigure}#1}%
-  }% 
-}
+%% % Outputs the current figure source line to the .los.
+%% \newcommand*{\iGenFigureSource}[1]{%
+%%   \ifthenelse{\equal{#1}{x}}{}{%
+%%     \addcontentsline{los}{section}{\protect\numberline{\thefigure}#1}%
+%%   }% 
+%% }
 
 % Outputs the figure source line to the .los file and clears it.
 \newcommand*{\iFigureSource}{{%
