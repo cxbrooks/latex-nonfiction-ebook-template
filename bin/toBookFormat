@@ -336,7 +336,8 @@ function makePdf()
         logrun "Generate index" "makeindex" "\"$bookName\".idx" 2
         logrun "Latex to PDF -- pass 3" "pdflatex" "$pdfparms" 1
         logrun "Latex to PDF -- pass 4" "pdflatex" "$pdfparms" 1
-        #logrun "Latex to PDF -- pass 5" "pdflatex" "$pdfparms" 1
+        logrun "Latex to PDF -- pass 5" "pdflatex" "$pdfparms" 1
+        #logrun "Latex to PDF -- pass 6" "pdflatex" "$pdfparms" 1
     fi
  }
 
