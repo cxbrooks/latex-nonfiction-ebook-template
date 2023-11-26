@@ -56,7 +56,10 @@
 % Math and Software 
 %\usepackage{amsmath}             % American math (cannot use with wasysym)
 \usepackage{mathtools}
-\usepackage{wasysym}              % Additional symbols
+% Don't use wasysym and fix:
+%  LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
+%  (Font)              Font shape `U/wasy/m/n' tried instead on input line 168.
+%\usepackage{wasysym}              % Additional symbols
 \usepackage{amssymb}              % American math symbols
 \usepackage{latexsym}             % LaTex symbols
 \usepackage{amsfonts} % experimental
