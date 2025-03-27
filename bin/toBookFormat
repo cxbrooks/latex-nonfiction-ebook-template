@@ -217,6 +217,7 @@ function prepareDir()
     run "echo \"$toDir/bookName.tex\""
     run "ls -l \"$toDir/$bookName.tex\""
     copyIfExists "$bookName.cfg" "$toDir"
+    copyIfExists "$bookName.mk4" "$toDir"
     if [[ $ishtml -eq 1 ]]; then
         copyIfExists "tex4ht.env"   "$toDir"
 #       copyIfExists "idxmake.4ht"  "$toDir"
@@ -333,7 +334,8 @@ function makePdf()
         logrun "Generate bibliography (again)" "biber" "$bookName" 1
         echo "Skipping generating referenced authors list because setting NOAUTHORS does not work"
         #logrun "Generate referenced authors list" "authorindex" "\"$bookName\"" 2
-        logrun "Generate index" "makeindex" "\"$bookName\".idx" 2
+        #logrun "Generate index" "makeindex" "\"$bookName\".idx" 2        
+        logrun "Generate index" "makeindex" "\"$bookName\"" 2
         logrun "Latex to PDF -- pass 3" "pdflatex" "$pdfparms" 1
         logrun "Latex to PDF -- pass 4" "pdflatex" "$pdfparms" 1
         logrun "Latex to PDF -- pass 5" "pdflatex" "$pdfparms" 1
@@ -364,9 +366,12 @@ function makeEpub()
 {
     #makeXbbFiles
     #logrun "Resize XBB files" "../bin/resizeXbb.py" "--stringIO -dir=images" 3
-    local cmd="$bookName.tex -f epub3"
+    local cmd="$bookName.tex -f epub3 -a debug"
     if [[ -e "$bookName.cfg" ]]; then
         cmd="--config $bookName.cfg $cmd"
+    fi
+    if [[ -e "$bookName.mk4" ]]; then
+        cmd="-e $bookName.mk4 $cmd"
     fi
     logrun "$0: which tex4ebook: " which "tex4ebook"
     logrun "$0: Create iBook .epub file(s) - pass 1" "tex4ebook" "$cmd" 3
