@@ -16,7 +16,14 @@
 % --------------------------------------------------------------------------
 \usepackage{etoolbox}                   % Extended macro management tools
 \usepackage{xparse}                     % Extended newcommands
-\usepackage{makeidx}          % Enable Index creation
+
+% cxh: Use imakeidx, see book.tex and https://cx.snakefur.com/wiki/index.php?title=LaTeX
+%\usepackage{makeidx}          % Enable Index creation
+% cxh: If these lines are present, then we get ! Undefined control sequence. <argument> \@indexfile
+% cxh: Instead, put them in book.tex
+%% \usepackage{imakeidx}         % allows index generation
+%% \makeindex[options=-s columnseprule,intoc,columns=2] % https://tex.stackexchange.com/questions/232752/placing-of-bold-entries-in-the-index
+
 \usepackage[tight]{shorttoc}            % Allow an abbreviated table of contents
 % cxh: commented out because tocloft package interfers with a KOMA-Script class
 %\usepackage{tocloft}                    % Control TOC and create new lists
@@ -425,9 +432,11 @@
    }%       
   }%        
  }{%
-  \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
-   \IfFileExists{\ImageSource/#2.pdf}{\IMAGE[#1]{#2.pdf}}{%
+  \IfFileExists{\ImageSource/#2.png}{\IMAGE[#1]{#2.png}}{%
+   \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
+    \IfFileExists{\ImageSource/#2.pdf}{\IMAGE[#1]{#2.pdf}}{%
     \IMAGE[#1]{#2.png}%
+    }%        
    }%        
   }%        
  }%
