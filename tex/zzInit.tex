@@ -97,6 +97,7 @@
             pdftitle={\TheMainTitle: \TheSubTitle},
             pdfsubject={\TheSubjectArea},
             pdfkeywords={\TheKeywords},
+            hidelinks,colorlinks=true,linkcolor=black,citecolor=black, %https://tex.stackexchange.com/questions/609681/change-citations-color-to-blue
             plainpages=false]{hyperref}
   }
 }
@@ -424,18 +425,36 @@
 %   \Image[options]{namebase}
 \newcommand{\Image}[2][]{%
  \ifthenelse{\boolean{NOCOLOR}}{%
-  \IfFileExists{\ImageSource/#2_BW.jpg}{\IMAGE[#1]{#2_BW.jpg}}{%
-   \IfFileExists{\ImageSource/#2_BW.png}{\IMAGE[#1]{#2_BW.png}}{%
+  \IfFileExists{\ImageSource/#2_BW.png}{\IMAGE[#1]{#2_BW.png}}{%
+   \IfFileExists{\ImageSource/#2_BW.jpg}{\IMAGE[#1]{#2_BW.jpg}}{%
     \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
      \IMAGE[#1]{#2.png}%
     }%        
    }%       
   }%        
  }{%
-  \IfFileExists{\ImageSource/#2.png}{\IMAGE[#1]{#2.png}}{%
-   \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
+  \ifthenelse{\boolean{THUMBS}}{%
+   \IfFileExists{\ImageSource/#2_tn.png}{\IMAGE[#1]{#2_tn.png}}{%
+    \IfFileExists{\ImageSource/#2_tn.jpg}{\IMAGE[#1]{#2_tn.jpg}}{%
+     \IfFileExists{\ImageSource/#2_tn.pdf}{\IMAGE[#1]{#2_tn.pdf}}{%
+      \IfFileExists{\ImageSource/#2_tn.bmp}{\IMAGE[#1]{#2_tn.bmp}}{%
+       \IfFileExists{\ImageSource/#2.png}{\IMAGE[#1]{#2.png}}{%
+        \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
+         \IfFileExists{\ImageSource/#2.pdf}{\IMAGE[#1]{#2.pdf}}{%
+          \IMAGE[#1]{#2.png}%
+         }%
+        }%        
+       }%        
+      }%
+     }%        
+    }%        
+   }%        
+  }{
+   \IfFileExists{\ImageSource/#2.png}{\IMAGE[#1]{#2.png}}{%
     \IfFileExists{\ImageSource/#2.pdf}{\IMAGE[#1]{#2.pdf}}{%
-    \IMAGE[#1]{#2.png}%
+     \IfFileExists{\ImageSource/#2.jpg}{\IMAGE[#1]{#2.jpg}}{%
+     \IMAGE[#1]{#2.png}%
+     }%
     }%        
    }%        
   }%        
