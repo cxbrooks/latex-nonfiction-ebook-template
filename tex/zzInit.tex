@@ -20,7 +20,8 @@
 % cxh: Use imakeidx, see book.tex and https://cx.snakefur.com/wiki/index.php?title=LaTeX
 %\usepackage{makeidx}          % Enable Index creation
 % cxh: If these lines are present, then we get ! Undefined control sequence. <argument> \@indexfile
-% cxh: Instead, put them in book.tex
+% cxh: Instead, put them in book.tex.
+% cxh: fixme package must be used before imakeidx to avod "! Undefined control sequence. <argument> \@indexfile"
 %% \usepackage{imakeidx}         % allows index generation
 %% \makeindex[options=-s columnseprule,intoc,columns=2] % https://tex.stackexchange.com/questions/232752/placing-of-bold-entries-in-the-index
 
@@ -35,30 +36,30 @@
 \ifthenelse{\boolean{NOAUTHORS}}{}{
   \usepackage[biblabels]{authorindex}   % Enable Authors Cite list creation
 }
-\usepackage{multicol}                   % Multiple columns for the index
-\usepackage{blindtext}                  % Nonsense text fillers
-\usepackage{ifxetex,ifluatex}           % processor conditionals
-\usepackage{wrapfig}                    % Support wrapfigure environment
+%% \usepackage{multicol}                   % Multiple columns for the index
+%% \usepackage{blindtext}                  % Nonsense text fillers
+%% \usepackage{ifxetex,ifluatex}           % processor conditionals
+%% \usepackage{wrapfig}                    % Support wrapfigure environment
 \usepackage{endnotes}                   % Support endnotes.
-\usepackage{titling}                    % fancy titles with prefix and suffix
+%% \usepackage{titling}                    % fancy titles with prefix and suffix
 
-\usepackage[T1]{fontenc}        % enables special graphics
-\usepackage{textcomp}           % LaTex fonts and glyph encodings such as \textonehalf
-\usepackage{lmodern}            % LaTex modern math
-\usepackage[utf8]{inputenc}             % allows limited support for non-ascii UTF8 codes in text
+%% \usepackage[T1]{fontenc}        % enables special graphics
+%% \usepackage{textcomp}           % LaTex fonts and glyph encodings such as \textonehalf
+%% \usepackage{lmodern}            % LaTex modern math
+%% \usepackage[utf8]{inputenc}             % allows limited support for non-ascii UTF8 codes in text
 \usepackage{graphicx}                   % graphics driver support (math/images for PDFs)
 
-\usepackage[english]{babel}             % Support for non-english typesetting
-\usepackage[autostyle, english = american]{csquotes} % Backquotes
-% XXX %\usepackage{titlesec}                % title, chapter and section formatting
-\usepackage{enumerate}          % styles enumerated lists
+%% \usepackage[english]{babel}             % Support for non-english typesetting
+%% \usepackage[autostyle, english = american]{csquotes} % Backquotes
+%% % XXX %\usepackage{titlesec}                % title, chapter and section formatting
+%% \usepackage{enumerate}          % styles enumerated lists
 
 \usepackage{changepage}           % page and margin adjustments
 
 % Note ~/.config/texstudio/subcaption_jf.cwl file needed for autocompletion in TexStudio.
-\ifthenelse{\boolean{SUBCAPTIONS}}{
-  \usepackage{subcaption}               % subcaptions in figures]
-}{}
+%% \ifthenelse{\boolean{SUBCAPTIONS}}{
+%%   \usepackage{subcaption}               % subcaptions in figures]
+%% }{}
 
 % Math and Software 
 %\usepackage{amsmath}             % American math (cannot use with wasysym)
@@ -67,10 +68,10 @@
 %  LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
 %  (Font)              Font shape `U/wasy/m/n' tried instead on input line 168.
 %\usepackage{wasysym}              % Additional symbols
-\usepackage{amssymb}              % American math symbols
-\usepackage{latexsym}             % LaTex symbols
-\usepackage{amsfonts} % experimental
-\usepackage{bm}       % math bold - experimental
+%% \usepackage{amssymb}              % American math symbols
+%% \usepackage{latexsym}             % LaTex symbols
+%% \usepackage{amsfonts} % experimental
+%% \usepackage{bm}       % math bold - experimental
 
 %\usepackage{fontspec}    % -- Use with XeLaTex only for OpenType fonts
 %\usepackage{lilyglyphs}  % -- Use with XeLaTex only, Musical notations
@@ -102,9 +103,10 @@
   }
 }
 
-\usepackage{xstring}                    % String manipulation macros
-\usepackage{stringstrings}              % String manipulation macros
-\usepackage{xspace}                     % Useful in parameterless macros
+%% \usepackage{xstring}                    % String manipulation macros
+%% \usepackage{stringstrings}              % String manipulation macros
+\usepackage{xspace}                     % Useful in parameterless macros. Generating HTML needs the xspace package.
+
 
 %--------------------------------------------------------------------
 % controls the TOC, Footnote, and URL/Hyperref link colors.
@@ -193,12 +195,12 @@
 
 %%---------------------------------------------------------------------
 %% Set running headings at top of pages.
-\newcommand{\RightRunningHeads}[1]{\renewcommand\rightmark{#1}}
-\newcommand{\LeftRunningHeads}[1]{\renewcommand\leftmark{#1}}
+%% \newcommand{\RightRunningHeads}[1]{\renewcommand\rightmark{#1}}
+%% \newcommand{\LeftRunningHeads}[1]{\renewcommand\leftmark{#1}}
 
 \newcommand{\RunningHeads}[1]{
-    \LeftRunningHeads{#1}%
-    \RightRunningHeads{#1}%
+%%     \LeftRunningHeads{#1}%
+%%     \RightRunningHeads{#1}%
 }
 
 %%---------------------------------------------------------------------
@@ -290,7 +292,7 @@
   }{%
     \addtoendnotes{
       \bigskip\StopIndent
-      \large\textsf{Chapter \thechapter\, --- #1}
+      \large\textsf{Chapterxxx \thechapter\, --- #1}
       \normalsize\normalfont\bigskip
     }
   }%    
